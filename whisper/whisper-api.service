@@ -1,0 +1,15 @@
+[Unit]
+Description=Whisper Transcription API (large-v3, CUDA)
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/voice-service/whisper
+ExecStart=/home/%i/.local/bin/uvicorn server:app --host 0.0.0.0 --port 8100
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
